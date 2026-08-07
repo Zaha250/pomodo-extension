@@ -118,6 +118,16 @@ $("#close-settings").addEventListener("click", () => {
   settingsError.textContent = "";
 });
 
+/*$("#test-notification").addEventListener("click", async () => {
+  settingsError.textContent = "";
+
+  try {
+    await send({ type: "TEST_NOTIFICATION" });
+  } catch (error) {
+    settingsError.textContent = error instanceof Error ? error.message : "Ошибка";
+  }
+});*/
+
 $("#settings-form").addEventListener("submit", async (event) => {
   event.preventDefault();
   settingsError.textContent = "";

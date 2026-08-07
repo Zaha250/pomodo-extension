@@ -5,6 +5,7 @@ export type TimerCommand =
   | { type: "START" }
   | { type: "PAUSE" }
   | { type: "RESET" }
+  | { type: "TEST_NOTIFICATION" }
   | { type: "SAVE_SETTINGS"; settings: Settings };
 
 export interface TimerResponse {
