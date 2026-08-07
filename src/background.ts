@@ -4,6 +4,7 @@ import {
   getRemainingMs,
   normalizeDay,
   reconcileExpired,
+  startFocus,
   validateSettings,
   type TimerMode,
   type TimerState
@@ -201,6 +202,10 @@ async function handleCommand(
 
       break;
     }
+
+    case "START_FOCUS":
+      state = startFocus(state);
+      break;
 
     case "PAUSE": {
       if (state.status !== "running") {

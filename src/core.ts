@@ -130,6 +130,21 @@ export function completeInterval(
   };
 }
 
+export function startFocus(
+    state: TimerState,
+    now = Date.now()
+): TimerState {
+  const remainingMs = durationMs("focus", state.settings);
+
+  return {
+    ...state,
+    mode: "focus",
+    status: "running",
+    endAt: now + remainingMs,
+    remainingMs
+  };
+}
+
 export function reconcileExpired(
     state: TimerState,
     now = new Date()

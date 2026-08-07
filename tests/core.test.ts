@@ -8,6 +8,7 @@ import {
   getRemainingMs,
   normalizeDay,
   reconcileExpired,
+  startFocus,
   validateSettings
 } from "../src/core.ts";
 
@@ -69,6 +70,32 @@ describe("timer core", () => {
 
     assert.equal(result.state.mode, "focus");
     assert.equal(result.state.todayCount, 2);
+  });
+
+  it("starts a new focus session while keeping completed-session counters", () => {
+    const settings = {
+      ...createDefaultState().settings,
+      focusMinutes: 30
+    };
+    const breakState = {
+      ...createDefaultState(),
+      mode: "shortBreak" as const,
+      status: "running" as const,
+      endAt: 1_000,
+      remainingMs: 30_000,
+      cycleFocusCount: 2,
+      todayCount: 2,
+      settings
+    };
+
+    const result = startFocus(breakState, 10_000);
+
+    assert.equal(result.mode, "focus");
+    assert.equal(result.status, "running");
+    assert.equal(result.remainingMs, 30 * 60_000);
+    assert.equal(result.endAt, 10_000 + 30 * 60_000);
+    assert.equal(result.cycleFocusCount, 2);
+    assert.equal(result.todayCount, 2);
   });
 
   it("resets only the daily counter on a new local date", () => {

@@ -13,6 +13,7 @@ const statusLabel = $("#status-label");
 const timerRing = $("#timer-ring");
 const toggleButton = $("#toggle-timer") as HTMLButtonElement;
 const resetButton = $("#reset-timer") as HTMLButtonElement;
+const startFocusButton = $("#start-focus") as HTMLButtonElement;
 const todayCount = $("#today-count");
 const cycleDots = $("#cycle-dots");
 const timerError = $("#timer-error");
@@ -55,6 +56,7 @@ function render(): void {
   modeLabel.textContent = modeNames[state.mode];
   statusLabel.textContent = statusNames[state.status];
   toggleButton.textContent = state.status === "running" ? "Пауза" : state.status === "paused" ? "Продолжить" : "Начать";
+  startFocusButton.hidden = state.mode === "focus";
   todayCount.textContent = String(state.todayCount);
   timerRing.style.setProperty("--progress", `${progress * 360}deg`);
   document.body.dataset.mode = state.mode;
@@ -97,6 +99,19 @@ resetButton.addEventListener("click", async () => {
   timerError.textContent = "";
   state = await send({ type: "RESET" });
   render();
+});
+
+startFocusButton.addEventListener("click", async () => {
+  timerError.textContent = "";
+  startFocusButton.disabled = true;
+  try {
+    state = await send({ type: "START_FOCUS" });
+    render();
+  } catch (error) {
+    timerError.textContent = error instanceof Error ? error.message : "Ошибка";
+  } finally {
+    startFocusButton.disabled = false;
+  }
 });
 
 $("#open-settings").addEventListener("click", () => {
