@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "Pomodo",
+  "description": "Минималистичный личный Pomodoro-таймер.",
+  "version": "1.0.0",
+  "permissions": ["storage", "alarms", "notifications"],
+  "background": {
+    "service_worker": "assets/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Pomodo",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}

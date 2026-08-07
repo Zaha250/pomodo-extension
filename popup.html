@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pomodo</title>
+  </head>
+  <body>
+    <main class="app" id="timer-view">
+      <header class="header">
+        <div class="brand"><span class="brand-mark">P</span><span>Pomodo</span></div>
+        <button class="icon-button" id="open-settings" aria-label="Открыть настройки" title="Настройки">⚙</button>
+      </header>
+
+      <section class="timer-section" aria-live="polite">
+        <span class="mode-pill" id="mode-label">Фокус</span>
+        <div class="timer-ring" id="timer-ring">
+          <div class="timer-face">
+            <span class="time" id="time">25:00</span>
+            <span class="status" id="status-label">Готов к работе</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="actions">
+        <button class="primary-button" id="toggle-timer">Начать</button>
+        <button class="secondary-button" id="reset-timer">Сбросить</button>
+      </div>
+
+      <section class="summary" aria-label="Прогресс">
+        <div>
+          <span class="summary-label">Текущий цикл</span>
+          <div class="cycle-dots" id="cycle-dots"></div>
+        </div>
+        <div class="today"><strong id="today-count">0</strong><span>сегодня</span></div>
+      </section>
+      <p class="error" id="timer-error" role="alert"></p>
+    </main>
+
+    <main class="app settings-view" id="settings-view" hidden>
+      <header class="header">
+        <button class="icon-button back-button" id="close-settings" aria-label="Вернуться к таймеру">←</button>
+        <h1>Настройки</h1>
+        <span class="header-spacer"></span>
+      </header>
+      <form id="settings-form">
+        <label>Фокус, минут<input id="focus-minutes" type="number" min="1" max="180" required /></label>
+        <label>Короткий перерыв, минут<input id="short-minutes" type="number" min="1" max="60" required /></label>
+        <label>Длинный перерыв, минут<input id="long-minutes" type="number" min="1" max="120" required /></label>
+        <label>Сессий до длинного перерыва<input id="sessions-count" type="number" min="1" max="12" required /></label>
+        <button class="primary-button save-button" type="submit">Сохранить</button>
+        <p class="settings-hint">Настройки доступны, когда таймер остановлен.</p>
+        <p class="error" id="settings-error" role="alert"></p>
+      </form>
+    </main>
+    <script type="module" src="/src/popup.ts"></script>
+  </body>
+</html>
